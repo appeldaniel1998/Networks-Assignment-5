@@ -402,8 +402,10 @@ void ping(struct sockaddr_in *addr)
     struct sockaddr_in r_addr;
 
     sd = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP);
+
     if ( sd < 0 )
     {
+        fprintf (stderr, "To create a raw socket, the process needs to be run by Admin/root user.\n\n");
         perror("socket");
         return;
     }
@@ -411,9 +413,9 @@ void ping(struct sockaddr_in *addr)
         perror("Set TTL option");
     if ( fcntl(sd, F_SETFL, O_NONBLOCK) != 0 )
         perror("Request nonblocking I/O");
-    for (;;)
-    {	int len=sizeof(r_addr);
-
+    for (int k =0; k<2;i++)
+    {
+        int len=sizeof(r_addr);
         printf("Msg #%d\n", cnt);
         if ( recvfrom(sd, &pckt, sizeof(pckt), 0, (struct sockaddr*)&r_addr, &len) > 0 )
             printf("***Got message!***\n");
