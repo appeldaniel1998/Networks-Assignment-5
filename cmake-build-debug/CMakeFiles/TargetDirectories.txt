@@ -1,0 +1,3 @@
+/home/appeldaniel/CLionProjects/Networks5/cmake-build-debug/CMakeFiles/Networks5.dir
+/home/appeldaniel/CLionProjects/Networks5/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/appeldaniel/CLionProjects/Networks5/cmake-build-debug/CMakeFiles/rebuild_cache.dir
