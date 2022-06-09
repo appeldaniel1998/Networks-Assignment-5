@@ -3,4 +3,4 @@ project(Networks5)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(Networks5 main.cpp)
+add_executable(Networks5 ICMP.cpp myNuPing.c main.cpp myICMP.c)
