@@ -379,16 +379,17 @@ void listener(void)
         perror("socket");
         exit(0);
     }
-    for (;;)
-    {	int bytes, len=sizeof(addr);
+//    for (;;)
+//    {
+    int bytes, len=sizeof(addr);
 
-        bzero(buf, sizeof(buf));
-        bytes = recvfrom(sd, buf, sizeof(buf), 0, (struct sockaddr*)&addr, &len);
-        if ( bytes > 0 )
-            display(buf, bytes);
-        else
-            perror("recvfrom");
-    }
+    bzero(buf, sizeof(buf));
+    bytes = recvfrom(sd, buf, sizeof(buf), 0, (struct sockaddr*)&addr, &len);
+    if ( bytes > 0 )
+        display(buf, bytes);
+    else
+        perror("recvfrom");
+//    }
     exit(0);
 }
 
@@ -417,6 +418,7 @@ void ping(struct sockaddr_in *addr)
     {
         int len=sizeof(r_addr);
         printf("Msg #%d\n", cnt);
+        printf("sd:%d ,&pckt: %p ,sizeof(pckt):%lu, (struct sockaddr*)&r_addr:%p ,&len:%p \n", sd, &pckt, sizeof(pckt), (struct sockaddr*)&r_addr,&len);
         if ( recvfrom(sd, &pckt, sizeof(pckt), 0, (struct sockaddr*)&r_addr, &len) > 0 )
             printf("***Got message!***\n");
         bzero(&pckt, sizeof(pckt));
@@ -430,6 +432,7 @@ void ping(struct sockaddr_in *addr)
         if ( sendto(sd, &pckt, sizeof(pckt), 0, (struct sockaddr*)addr, sizeof(*addr)) <= 0 )
             perror("sendto");
         sleep(1);
+        k++;
     }
 }
 
