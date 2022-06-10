@@ -309,6 +309,7 @@
 #include <arpa/inet.h>
 #include <wait.h>
 #include <string.h>
+#include <time.h>
 
 #define PACKETSIZE	64
 struct packet
@@ -440,7 +441,10 @@ void ping(struct sockaddr_in *addr)
 /*--- main - look up host and start ping processes.                ---*/
 /*--------------------------------------------------------------------*/
 int main(int count, char *strings[])
-{	struct hostent *hname;
+{
+    clock_t t;
+    t = clock();
+    struct hostent *hname;
     struct sockaddr_in addr;
 
     if ( count != 2 )
@@ -465,5 +469,9 @@ int main(int count, char *strings[])
     }
     else
         printf("usage: myping <hostname>\n");
+
+    t = clock() - t;
+    double time_taken = ((double)t)/CLOCKS_PER_SEC;
+    printf("Time taken: %f", time_taken);
     return 0;
 }
